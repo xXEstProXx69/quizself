@@ -1,0 +1,138 @@
+body{
+margin:0;
+color:orange;
+font-family:verdana;
+}
+
+nav{
+background-color:orange;
+display:flex;
+justify-content:flex-end;
+}
+
+nav a{
+text-decoration:none;
+padding:30px;
+color:white;
+}
+
+nav a:hover{
+background-color:#FF8C00;
+}
+
+#shoppingweb{
+color:orange;
+margin-left:20px;
+}
+#addproduct{
+color:white;
+background:orange;
+border:none;
+margin:20px;
+width:200px;
+height:100px;
+cursor:pointer;
+position:relative;
+top:830px;
+left:-10px;
+border:1px solid white;
+transition: background-color 0.3s ease;
+}
+
+#addproduct:hover{
+background-color:black;
+}
+
+#sidebar{
+position:fixed;
+top:0;
+right:-250px;
+width:210px;
+height:100%;
+background:orange;
+padding:20px;
+transition:0.5s;
+}
+
+#sidebar.active{
+right:0;
+}
+
+
+#sidebar a{
+display:block;
+margin-bottom:15px;
+text-decoration:none;
+color:white;
+width: 100%;
+padding: 10px;
+}
+
+#sidebar a:hover{
+	color: black;
+	transition: 0.6s;
+}
+
+#close-btn{
+font-size:30px;
+}
+
+#products{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+padding:20px;
+}
+
+.product{
+border:1px solid orange;
+padding:10px;
+width:300px;
+height: 350px;
+text-align:center;
+}
+
+.product img{
+width:300px;
+height: 250px;
+}
+#product-menu{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:50px;
+border:2px solid orange;
+display:none;
+flex-direction:column;
+gap:10px;
+z-index:1000;
+}
+
+#product-menu.active{
+display:flex;
+}
+
+#product-menu input{
+padding:8px;
+}
+
+#create-product{
+background:orange;
+color:white;
+border:none;
+padding:10px;
+cursor:pointer;
+}
+
+#AP-close-btn {
+	text-decoration: none;
+	color: black;
+}
+
+#product-menu input {
+	position: relative;
+	left: 2px;
+	border: 1px solid orange;
+}
