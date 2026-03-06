@@ -1,7 +1,4 @@
-let products = [
-{ name: "Shoes", price: 59, image: "shoes.jpg" },
-{ name: "Hat", price: 20, image: "hat.jpg" }
-];
+let products = [];
 
 function LoadProducts(){
 const saved = localStorage.getItem("SellingProducts");
@@ -30,17 +27,21 @@ sidebar.classList.remove("active");
 function renderProducts(){
 ProductsContainer.innerHTML = "";
 
-products.forEach(p => {
+products.forEach((p, index) => {
 
 const productDiv = document.createElement("div");
 productDiv.classList.add("product");
 
-const BuyBtn = document.createElement("button");
-BuyBtn.classList.add("product");
-
 const RP = document.createElement("button");
-RP.textContent = "×"
-RP.classList.add("product");
+RP.textContent = "×";
+RP.classList.add("RP");
+
+RP.onclick = function(){
+products.splice(index, 1);
+SaveProducts();
+renderProducts();
+}
+
 const img = document.createElement("img");
 img.src = p.image;
 
@@ -50,6 +51,7 @@ name.textContent = p.name;
 const price = document.createElement("p");
 price.textContent = "€" + p.price;
 
+productDiv.appendChild(RP);
 productDiv.appendChild(img);
 productDiv.appendChild(name);
 productDiv.appendChild(price);
@@ -84,6 +86,7 @@ if (priceInput.value === "" || isNaN(priceInput.value)) {
 	alert("Sisestatud hind ei ole aksepteeritav");
 	return;
 }
+
 const newProduct = {
 name: nameInput.value,
 price: Number(priceInput.value),
@@ -111,4 +114,17 @@ imageInput.value = "";
 }
 });
 
-
+const body = document.querySelector("body")
+body.classList.add("light");
+const darkmode = document.querySelector("#darkmode");
+darkmode.onclick = function(){
+	if (body.classList.contains("light")) {
+		body.classList.remove("light");
+		body.classList.add("dark");
+		console.log("dark")
+	} else {
+		body.classList.remove("dark");
+		body.classList.add("light");
+		console.log("light");
+	}
+}
