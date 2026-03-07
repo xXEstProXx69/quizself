@@ -1,17 +1,28 @@
 body{
 margin:0;
-color:orange;
 font-family:verdana;
 }
-body.light {
+body.light  {
+	transition: 0.4s;
   background-color: #ffffff;
-  color: #000000;
 }
 
 body.dark {
+	transition: 0.4s;
   background-color: #1a1a1a;
-  color: #ffffff;
 }
+
+body.light .product p {
+	transition: 0.4s;
+	color: black;
+}
+
+body.dark .product p {
+	transition: 0.4s;
+	color:white;
+}
+
+
 nav{
 background-color:orange;
 display:flex;
@@ -28,13 +39,41 @@ nav a:hover{
 background-color:#FF8C00;
 }
 
+.product {
+    border: 1px solid orange;
+    padding: 10px;
+    width: 300px;
+    height: 350px;
+    text-align: center;
+    position: relative;
+}
+
+.price-tag{
+	position: relative;
+	top: -20px;
+	padding-left: 60px;
+	color:black;
+	width: 50%;
+}
+
+
+.product-name {
+	color:black;
+	position: relative;
+	top: -15px;
+	padding-left: 60px;
+	width: 50%;
+
+}
+
 #darkmode {
 	position: relative;
 		cursor: pointer;
 		color:black;
 		display: flex;
-		left: -2100px;
-		font-size: 2px;
+		left: -1470px;
+		top: 5px;
+		font-size: 20px;
 }
 
 #darkmode:hover {
@@ -64,6 +103,7 @@ transition: background-color 0.3s ease;
 background-color:black;
 }
 
+
 #sidebar{
 position:fixed;
 top:0;
@@ -89,6 +129,19 @@ width: 100%;
 padding: 10px;
 }
 
+.soldpngn {
+    display: none;
+}
+
+.soldpngs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
 #sidebar a:hover{
 	color: black;
 	transition: 0.6s;
@@ -116,12 +169,12 @@ text-align:center;
 .product img{
 width:300px;
 height: 250px;
+
 }
 #product-menu{
 position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
+top:25%;
+left: 36%;
 background:black;
 padding:120px;
 border:5px solid orange;
@@ -161,6 +214,28 @@ cursor:pointer;
 
 }
 
+.buybtn.sold {
+	z-index: -100;
+}
+
+.buybtn {
+	border: none;
+	color: white;
+	background-color: limegreen;
+	cursor: pointer;
+	border-radius: 10px;
+	width: 80px;
+	height: 50px;
+	position: relative;
+	float: right;
+	z-index: 999;
+	top: 305px;
+}
+
+.buybtn:hover{
+	background-color: green;
+}
+
 #product-menu input {
 	position: relative;
 	left: 2px;
@@ -172,14 +247,15 @@ cursor:pointer;
 }
 
 .RP {
-	 border: 1px solid orange;
-	 background-color: orange;
+	 border: 1px solid red;
+	 background-color: red;
 	 color: white;
 	 cursor: pointer;
 	 float: left;
 	 margin: 5px;
+	 z-index: 1;
 }
 
 .RP:hover {
-	background-color: #F28C28;
+	background-color: #darkred;
 }

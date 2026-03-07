@@ -32,9 +32,15 @@ products.forEach((p, index) => {
 const productDiv = document.createElement("div");
 productDiv.classList.add("product");
 
+const buybtn = document.createElement("button");
+buybtn.classList.add("buybtn");
+buybtn.textContent = ("Buy")
+
+
 const RP = document.createElement("button");
 RP.textContent = "×";
 RP.classList.add("RP");
+
 
 RP.onclick = function(){
 products.splice(index, 1);
@@ -42,21 +48,54 @@ SaveProducts();
 renderProducts();
 }
 
+
+const status = p.sold;
+
+
+const soldpng = document.createElement("img");
+soldpng.classList.add("soldpngn")
+soldpng.src = "sold.png";
+
 const img = document.createElement("img");
 img.src = p.image;
 
+
 const name = document.createElement("p");
 name.textContent = p.name;
+name.classList.add("product-name");
 
 const price = document.createElement("p");
-price.textContent = "€" + p.price;
+price.classList.add("price-tag");
+price.textContent = p.price + " €";
 
+
+
+productDiv.appendChild(soldpng);
+productDiv.appendChild(buybtn);
 productDiv.appendChild(RP);
 productDiv.appendChild(img);
 productDiv.appendChild(name);
 productDiv.appendChild(price);
 
 ProductsContainer.appendChild(productDiv);
+
+buybtn.onclick = function() {
+    if (p.sold === false) {
+        p.sold = true;
+        SaveProducts();   
+        renderProducts();
+    } else {
+        alert("Juba müüdud!");
+    }
+}
+
+if (p.sold === true) {
+    soldpng.classList.remove("soldpngn");
+    soldpng.classList.add("soldpngs");
+    buybtn.classList.add("sold");
+} else {
+    soldpng.classList.add("soldpngn");
+}
 
 });
 }
@@ -90,7 +129,8 @@ if (priceInput.value === "" || isNaN(priceInput.value)) {
 const newProduct = {
 name: nameInput.value,
 price: Number(priceInput.value),
-image: imageInput.value
+image: imageInput.value,
+sold: false
 }
 
 products.push(newProduct);
@@ -114,7 +154,7 @@ imageInput.value = "";
 }
 });
 
-const body = document.querySelector("body")
+const body = document.querySelector("body");
 body.classList.add("light");
 const darkmode = document.querySelector("#darkmode");
 darkmode.onclick = function(){
