@@ -34,7 +34,7 @@ productDiv.classList.add("product");
 
 const buybtn = document.createElement("button");
 buybtn.classList.add("buybtn");
-buybtn.textContent = ("Buy")
+buybtn.textContent = ("Buy");
 
 
 const RP = document.createElement("button");
@@ -48,7 +48,11 @@ SaveProducts();
 renderProducts();
 }
 
-
+const buymenu = document.querySelector("#buy-menu")
+const BMCbtn = document.querySelector("#BP-close-btn")
+const confirmbuy = document.querySelector("#confirmbuy");
+const productbought = document.querySelector("#product-bought");
+const continuebtn = document.querySelector("#continue");
 const status = p.sold;
 
 
@@ -58,6 +62,7 @@ soldpng.src = "sold.png";
 
 const img = document.createElement("img");
 img.src = p.image;
+img.classList.add("img")
 
 
 const name = document.createElement("p");
@@ -79,15 +84,44 @@ productDiv.appendChild(price);
 
 ProductsContainer.appendChild(productDiv);
 
+
+BMCbtn.onclick = function(){
+	buymenu.classList.remove("active");
+	clone.remove();
+}
 buybtn.onclick = function() {
-    if (p.sold === false) {
+	const clone = productDiv.cloneNode(true);
+	buymenu.classList.add("active");
+	clone.querySelector(".buybtn").remove();
+	clone.querySelector(".RP").remove();
+	buymenu.appendChild(clone);
+	clone.classList.add("clone");
+
+
+continuebtn.onclick = function() {
+	productbought.classList.remove("active");
+	clone.remove();
+	buymenu.classList.remove("active");
+	p.sold = true;
+
+}
+
+    /*if (p.sold === false) {
         p.sold = true;
         SaveProducts();   
-        renderProducts();
+        renderProducts(); 
     } else {
         alert("Juba müüdud!");
-    }
+    }*/
 }
+
+
+confirmbuy.onclick = function (){
+	productbought.classList.add("active");
+}
+
+
+
 
 if (p.sold === true) {
     soldpng.classList.remove("soldpngn");

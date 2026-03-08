@@ -189,6 +189,126 @@ z-index:1000;
 display:flex;
 }
 
+#product-bought {
+	position: fixed;
+	display: none;
+	color: white;
+	z-index: 2000;
+	left: 490px;
+	width: 400px;
+	border-radius: 16px;
+	background-color: gray;
+	height: 100px;
+}
+
+
+#continue {
+	border-radius: 5px;
+	background-color: black;
+	border: 2px solid gray;
+	color: white;
+	font-size: 15px;
+	bottom: 0px;
+	left: 38%;
+	width: 100px;
+	height: 50px;
+	position: absolute;
+	border-radius: 20px;
+	transition: 0.3s;
+	cursor: pointer;
+
+}
+
+#continue:hover {
+	background-color: #696969;
+}
+
+#continue:active{
+	transition: 0s;
+	background-color: black;
+}
+#product-bought.active {
+	display: flex;
+}
+
+#buy-menu{
+position:fixed;
+top:25%;
+left: 36%;
+background:black;
+display:none;
+gap:10px;
+color: white;
+width: 400px;
+height: 700px;
+z-index:1000;
+border-radius: 40px;
+}
+
+
+#buy-menu.active{
+	display: flex;
+}
+
+#BP-close-btn{
+	color:white;
+	text-decoration: none;
+	width: 18px;
+	height: 23px;
+	margin: 20px;
+	font-size: 20px;
+	z-index: 2;
+}
+
+
+
+#confirmbuy {
+	width: 300px;
+	height: 50px;
+	border: none;
+	border-radius: 15px;
+	cursor: pointer;
+	bottom: 20px;
+	left: 50px;
+	position: absolute;
+	background-color: limegreen;
+	color: white;
+	font-size: 25px;
+	font-family: verdana;
+	z-index: 1000;
+
+}
+
+#confirmbuy:active {
+	background-color: limegreen;
+}
+
+#confirmbuy:hover {
+	transition: 0.3s;
+	background-color: green;
+}
+
+
+.product.clone {
+	position: absolute;
+	top: 150px;
+	margin-left: 40px;
+}
+.product.clone .price-tag{
+	color: white;
+}
+
+.product.clone .product-name{
+	color: white;
+}
+#confirmTxt {
+	top: 20px;
+	width: 100%;
+	padding:20px;
+	position: absolute;
+}
+
+
 #product-menu input{
 padding:30px;
 font-size: 20px;
@@ -235,15 +355,14 @@ cursor:pointer;
 .buybtn:hover{
 	background-color: green;
 }
+.buybtn:active{
+	background-color: limegreen;
+}
 
 #product-menu input {
 	position: relative;
 	left: 2px;
 	border: 1px solid orange;
-}
-
-#auction {
-	transform: scale(1.5);
 }
 
 .RP {
