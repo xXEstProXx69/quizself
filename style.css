@@ -7,6 +7,14 @@ body.light  {
   background-color: #ffffff;
 }
 
+body.darkstart {
+  background-color: #1a1a1a;
+}
+
+body.darkstart .product p {
+	color: white;
+}
+
 body.dark {
 	transition: 0.4s;
   background-color: #1a1a1a;
@@ -116,7 +124,11 @@ transition:0.5s;
 }
 
 #sidebar.active{
-right:0;
+right:0px;
+}
+
+#products.sidebar-active {
+  margin-right: 210px;
 }
 
 
@@ -151,12 +163,6 @@ padding: 10px;
 font-size:30px;
 }
 
-#products{
-display:flex;
-flex-wrap:wrap;
-gap:20px;
-padding:20px;
-}
 
 .product{
 border:1px solid orange;
@@ -194,7 +200,7 @@ display:flex;
 	display: none;
 	color: white;
 	z-index: 2000;
-	left: 490px;
+	left: 688px;
 	width: 400px;
 	border-radius: 16px;
 	background-color: gray;
@@ -227,10 +233,18 @@ display:flex;
 	transition: 0s;
 	background-color: black;
 }
-#product-bought.active {
-	display: flex;
+
+#products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  transition: margin-right 0.5s; 
 }
 
+#products.sidebar-active {
+  margin-right: 210px;
+}
 #buy-menu{
 position:fixed;
 top:25%;
@@ -366,7 +380,7 @@ cursor:pointer;
 }
 
 .RP {
-	 border: 1px solid red;
+	border: none;
 	 background-color: red;
 	 color: white;
 	 cursor: pointer;
@@ -376,5 +390,5 @@ cursor:pointer;
 }
 
 .RP:hover {
-	background-color: #darkred;
+	background-color: #851414;
 }

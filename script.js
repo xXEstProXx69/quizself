@@ -16,12 +16,14 @@ const menuBtn = document.querySelector("#menu-btn");
 const sidebar = document.querySelector("#sidebar");
 const closeBtn = document.querySelector("#close-btn");
 
-menuBtn.onclick = function(){
-sidebar.classList.add("active");
+menuBtn.onclick = function() {
+  sidebar.classList.add("active");
+  ProductsContainer.classList.add("sidebar-active");
 }
 
-closeBtn.onclick = function(){
-sidebar.classList.remove("active");
+closeBtn.onclick = function() {
+  sidebar.classList.remove("active");
+  ProductsContainer.classList.remove("sidebar-active"); 
 }
 
 function renderProducts(){
@@ -62,7 +64,8 @@ soldpng.src = "sold.png";
 
 const img = document.createElement("img");
 img.src = p.image;
-img.classList.add("img")
+img.classList.add("img");
+
 
 
 const name = document.createElement("p");
@@ -91,18 +94,27 @@ BMCbtn.onclick = function(){
 }
 buybtn.onclick = function() {
 	const clone = productDiv.cloneNode(true);
+	const exists = buymenu.querySelector(".clone");
+	if (exists) {
+		exists.remove();
+	}
 	buymenu.classList.add("active");
 	clone.querySelector(".buybtn").remove();
 	clone.querySelector(".RP").remove();
 	buymenu.appendChild(clone);
 	clone.classList.add("clone");
 
+confirmbuy.onclick = function (){
+	p.sold = true;
+	productbought.classList.add("active");
+	SaveProducts();
+	renderProducts();
+}
 
 continuebtn.onclick = function() {
 	productbought.classList.remove("active");
 	clone.remove();
 	buymenu.classList.remove("active");
-	p.sold = true;
 
 }
 
@@ -116,9 +128,6 @@ continuebtn.onclick = function() {
 }
 
 
-confirmbuy.onclick = function (){
-	productbought.classList.add("active");
-}
 
 
 
@@ -189,13 +198,19 @@ imageInput.value = "";
 });
 
 const body = document.querySelector("body");
-body.classList.add("light");
+body.classList.add("darkstart");
 const darkmode = document.querySelector("#darkmode");
 darkmode.onclick = function(){
 	if (body.classList.contains("light")) {
+		body.classList.remove("darkstart");
 		body.classList.remove("light");
 		body.classList.add("dark");
-		console.log("dark")
+		console.log("dark");
+	} else if (body.classList.contains("darkstart")) {
+		body.classList.remove("darkstart");
+		body.classList.remove("dark");
+		body.classList.add("light");
+		console.log("light from start");
 	} else {
 		body.classList.remove("dark");
 		body.classList.add("light");
