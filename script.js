@@ -107,6 +107,7 @@ buybtn.onclick = function() {
 confirmbuy.onclick = function (){
 	p.sold = true;
 	productbought.classList.add("active");
+	continuebtn.classlist.add("active");
 	SaveProducts();
 	renderProducts();
 }
