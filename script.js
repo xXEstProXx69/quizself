@@ -1,4 +1,4 @@
-const BIN_ID = "69c4e7e2b7ec241ddca4ff58";
+
 
 let products = [];
 
@@ -7,7 +7,7 @@ async function LoadProducts() {
     ProductsContainer.innerHTML = "Loading products...";
 
     try {
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`);
+        const response = await fetch(`https://api.jsonbin.io/v3/b/69c4e7e2b7ec241ddca4ff58/latest`);
         const data = await response.json();
         products = data.record.products || [];
     } catch (err) {
@@ -20,7 +20,7 @@ async function LoadProducts() {
 
 async function SaveProducts() {
     try {
-        await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+        await fetch(`https://api.jsonbin.io/v3/b/69c4e7e2b7ec241ddca4ff58`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
