@@ -79,6 +79,7 @@ function renderProducts() {
         soldpng.classList.add("soldpngn");
         soldpng.src = "sold.png";
 
+
         const img = document.createElement("img");
         img.src = p.image;
         img.classList.add("img");
@@ -138,7 +139,107 @@ function renderProducts() {
             soldpng.classList.add("soldpngn");
         }
     });
+
+RP.onclick = function(){
+products.splice(index, 1);
+SaveProducts();
+renderProducts();
 }
+
+const buymenu = document.querySelector("#buy-menu")
+const BMCbtn = document.querySelector("#BP-close-btn")
+const confirmbuy = document.querySelector("#confirmbuy");
+const productbought = document.querySelector("#product-bought");
+const continuebtn = document.querySelector("#continue");
+const status = p.sold;
+
+
+const soldpng = document.createElement("img");
+soldpng.classList.add("soldpngn")
+soldpng.src = "sold.png";
+
+const img = document.createElement("img");
+img.src = p.image;
+img.classList.add("img");
+
+
+
+const name = document.createElement("p");
+name.textContent = p.name;
+name.classList.add("product-name");
+
+const price = document.createElement("p");
+price.classList.add("price-tag");
+price.textContent = p.price + " €";
+
+
+
+productDiv.appendChild(soldpng);
+productDiv.appendChild(buybtn);
+productDiv.appendChild(RP);
+productDiv.appendChild(img);
+productDiv.appendChild(name);
+productDiv.appendChild(price);
+
+ProductsContainer.appendChild(productDiv);
+
+
+BMCbtn.onclick = function(){
+	buymenu.classList.remove("active");
+	clone.remove();
+}
+buybtn.onclick = function() {
+	const clone = productDiv.cloneNode(true);
+	const exists = buymenu.querySelector(".clone");
+	if (exists) {
+		exists.remove();
+	}
+	buymenu.classList.add("active");
+	clone.querySelector(".buybtn").remove();
+	clone.querySelector(".RP").remove();
+	buymenu.appendChild(clone);
+	clone.classList.add("clone");
+
+confirmbuy.onclick = function (){
+	p.sold = true;
+	productbought.classList.add("active");
+	continuebtn.classlist.add("active");
+	SaveProducts();
+	renderProducts();
+}
+
+continuebtn.onclick = function() {
+	productbought.classList.remove("active");
+	clone.remove();
+	buymenu.classList.remove("active");
+
+}
+
+    /*if (p.sold === false) {
+        p.sold = true;
+        SaveProducts();   
+        renderProducts(); 
+    } else {
+        alert("Juba müüdud!");
+    }*/
+}
+
+
+
+
+
+
+if (p.sold === true) {
+    soldpng.classList.remove("soldpngn");
+    soldpng.classList.add("soldpngs");
+    buybtn.classList.add("sold");
+} else {
+    soldpng.classList.add("soldpngn");
+}
+
+}
+
+
 
 // Init
 LoadProducts();
@@ -191,6 +292,7 @@ document.addEventListener("DOMContentLoaded", function() {
 const body = document.querySelector("body");
 body.classList.add("darkstart");
 const darkmode = document.querySelector("#darkmode");
+
 darkmode.onclick = function() {
     if (body.classList.contains("light")) {
         body.classList.remove("darkstart");
@@ -205,3 +307,22 @@ darkmode.onclick = function() {
         body.classList.add("light");
     }
 }
+
+darkmode.onclick = function(){
+	if (body.classList.contains("light")) {
+		body.classList.remove("darkstart");
+		body.classList.remove("light");
+		body.classList.add("dark");
+		console.log("dark");
+	} else if (body.classList.contains("darkstart")) {
+		body.classList.remove("darkstart");
+		body.classList.remove("dark");
+		body.classList.add("light");
+		console.log("light from start");
+	} else {
+		body.classList.remove("dark");
+		body.classList.add("light");
+		console.log("light");
+	}
+}
+
