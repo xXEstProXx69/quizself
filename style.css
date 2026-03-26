@@ -197,7 +197,7 @@ display:flex;
 
 #product-bought {
 	position: fixed;
-	display: none;
+	visibility: hidden;
 	color: white;
 	z-index: 2000;
 	left: 688px;
@@ -205,6 +205,10 @@ display:flex;
 	border-radius: 16px;
 	background-color: gray;
 	height: 100px;
+}
+
+#product-bought.active {
+	visibility: visible;
 }
 
 
