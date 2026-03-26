@@ -3,33 +3,23 @@
 let products = [];
 
 async function LoadProducts() {
-
     ProductsContainer.innerHTML = "Loading products...";
 
-    try {
-        const response = await fetch(`https://api.jsonbin.io/v3/b/69c4e7e2b7ec241ddca4ff58/latest`);
-        const data = await response.json();
-        products = data.record.products || [];
-    } catch (err) {
-        console.error("Failed to load products:", err);
-        products = [];
-    }
+    const response = await fetch(`https://api.jsonbin.io/v3/b/69c4e7e2b7ec241ddca4ff58/latest`);
+    const data = await response.json();
+    products = data.record.products || [];
 
     renderProducts();
 }
 
 async function SaveProducts() {
-    try {
-        await fetch(`https://api.jsonbin.io/v3/b/69c4e7e2b7ec241ddca4ff58`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ products })
-        });
-    } catch (err) {
-        console.error("Failed to save products:", err);
-    }
+    await fetch(`https://api.jsonbin.io/v3/b/69c4e7e2b7ec241ddca4ff58`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ products })
+    });
 }
 
 const ProductsContainer = document.querySelector("#products");
