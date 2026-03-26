@@ -102,22 +102,17 @@ continuebtn.onclick = function() {
 	productbought.classList.remove("active");
 	clone.remove();
 	buymenu.classList.remove("active");
-	p.sold = true;
 
 }
 
-    /*if (p.sold === false) {
-        p.sold = true;
-        SaveProducts();   
-        renderProducts(); 
-    } else {
-        alert("Juba müüdud!");
-    }*/
+
+
 }
 
 
 confirmbuy.onclick = function (){
 	productbought.classList.add("active");
+	p.sold = true;
 }
 
 
@@ -127,9 +122,8 @@ if (p.sold === true) {
     soldpng.classList.remove("soldpngn");
     soldpng.classList.add("soldpngs");
     buybtn.classList.add("sold");
-} else {
-    soldpng.classList.add("soldpngn");
-}
+    renderProducts();
+} 
 
 });
 }
@@ -188,17 +182,23 @@ imageInput.value = "";
 }
 });
 
+
+
 const body = document.querySelector("body");
-body.classList.add("light");
+body.classList.add("darkmodestart");
 const darkmode = document.querySelector("#darkmode");
 darkmode.onclick = function(){
-	if (body.classList.contains("light")) {
-		body.classList.remove("light");
+	if (body.classList.contains("darkmodestart")) {
+		body.classList.remove("darkmodestart");
+		body.classList.add("light");
+		body.classList.remove("dark");
+		console.log("light")
+	} else if (body.classList.contains("light")){
 		body.classList.add("dark");
-		console.log("dark")
+		body.classList.remove("light");
+		console.log("dark");
 	} else {
 		body.classList.remove("dark");
 		body.classList.add("light");
-		console.log("light");
 	}
 }

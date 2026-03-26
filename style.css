@@ -22,21 +22,39 @@ body.dark .product p {
 	color:white;
 }
 
+body.darkmodestart{
+	  background-color: #1a1a1a;
+	  color:white;
+}
 
+body.darkmodestart .product p{
+	  	color:white;
+}
 nav{
 background-color:orange;
 display:flex;
-justify-content:flex-end;
+justify-content:space-between;
+align-items:center;
+padding:0 20px;
+}
+
+#nav-right a:hover {
+	background-color: #FF8C00;
+}
+#darkmode {
+cursor: pointer;
+color:black;
+font-size:20px;
+}
+
+nav div{
+display:flex;
 }
 
 nav a{
 text-decoration:none;
 padding:30px;
 color:white;
-}
-
-nav a:hover{
-background-color:#FF8C00;
 }
 
 .product {
@@ -64,16 +82,6 @@ background-color:#FF8C00;
 	padding-left: 60px;
 	width: 50%;
 
-}
-
-#darkmode {
-	position: relative;
-		cursor: pointer;
-		color:black;
-		display: flex;
-		left: -1470px;
-		top: 5px;
-		font-size: 20px;
 }
 
 #darkmode:hover {
