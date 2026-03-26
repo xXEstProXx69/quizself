@@ -1,20 +1,20 @@
-const BIN_ID = "69c2ac09aa77b81da9157e78";
-const MASTER_KEY = "$2a$10$0wB8WvOBmKg9qD3iMKxg.OVBYLzhMxnxj/E4IH6p7RsiD9LdEIx/i";
-const ACCESS_KEY = "$2a$10$VE/DkToWbvUDKZ1el6FNR.bjnJIodqRH3eNqLoxj7hcso79ihHuCa";
+const BIN_ID = "69c4e7e2b7ec241ddca4ff58";
 
 let products = [];
 
 async function LoadProducts() {
+
+    ProductsContainer.innerHTML = "Loading products...";
+
     try {
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { "X-Access-Key": ACCESS_KEY }
-        });
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`);
         const data = await response.json();
         products = data.record.products || [];
     } catch (err) {
         console.error("Failed to load products:", err);
         products = [];
     }
+
     renderProducts();
 }
 
@@ -23,8 +23,7 @@ async function SaveProducts() {
         await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json",
-                "X-Master-Key": MASTER_KEY
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({ products })
         });
@@ -79,7 +78,6 @@ function renderProducts() {
         soldpng.classList.add("soldpngn");
         soldpng.src = "sold.png";
 
-
         const img = document.createElement("img");
         img.src = p.image;
         img.classList.add("img");
@@ -111,9 +109,11 @@ function renderProducts() {
             const clone = productDiv.cloneNode(true);
             const exists = buymenu.querySelector(".clone");
             if (exists) exists.remove();
+
             buymenu.classList.add("active");
             clone.querySelector(".buybtn").remove();
             clone.querySelector(".RP").remove();
+
             buymenu.appendChild(clone);
             clone.classList.add("clone");
 
@@ -139,108 +139,7 @@ function renderProducts() {
             soldpng.classList.add("soldpngn");
         }
     });
-
-RP.onclick = function(){
-products.splice(index, 1);
-SaveProducts();
-renderProducts();
 }
-
-const buymenu = document.querySelector("#buy-menu")
-const BMCbtn = document.querySelector("#BP-close-btn")
-const confirmbuy = document.querySelector("#confirmbuy");
-const productbought = document.querySelector("#product-bought");
-const continuebtn = document.querySelector("#continue");
-const status = p.sold;
-
-
-const soldpng = document.createElement("img");
-soldpng.classList.add("soldpngn")
-soldpng.src = "sold.png";
-
-const img = document.createElement("img");
-img.src = p.image;
-img.classList.add("img");
-
-
-
-const name = document.createElement("p");
-name.textContent = p.name;
-name.classList.add("product-name");
-
-const price = document.createElement("p");
-price.classList.add("price-tag");
-price.textContent = p.price + " €";
-
-
-
-productDiv.appendChild(soldpng);
-productDiv.appendChild(buybtn);
-productDiv.appendChild(RP);
-productDiv.appendChild(img);
-productDiv.appendChild(name);
-productDiv.appendChild(price);
-
-ProductsContainer.appendChild(productDiv);
-
-
-BMCbtn.onclick = function(){
-	buymenu.classList.remove("active");
-	clone.remove();
-}
-buybtn.onclick = function() {
-	const clone = productDiv.cloneNode(true);
-	const exists = buymenu.querySelector(".clone");
-	if (exists) {
-		exists.remove();
-	}
-	buymenu.classList.add("active");
-	clone.querySelector(".buybtn").remove();
-	clone.querySelector(".RP").remove();
-	buymenu.appendChild(clone);
-	clone.classList.add("clone");
-
-confirmbuy.onclick = function (){
-	p.sold = true;
-	productbought.classList.add("active");
-	continuebtn.classlist.add("active");
-	SaveProducts();
-	renderProducts();
-}
-
-continuebtn.onclick = function() {
-	productbought.classList.remove("active");
-	clone.remove();
-	buymenu.classList.remove("active");
-
-}
-
-
-
-}
-
-
-
-confirmbuy.onclick = function (){
-	productbought.classList.add("active");
-	p.sold = true;
-}
-
-
-
-
-
-if (p.sold === true) {
-    soldpng.classList.remove("soldpngn");
-    soldpng.classList.add("soldpngs");
-    buybtn.classList.add("sold");
-    renderProducts();
-} 
-
-}
-
-
-
 
 LoadProducts();
 
@@ -258,28 +157,35 @@ document.addEventListener("DOMContentLoaded", function() {
         sidebar.classList.remove("active");
     }
 
-    createProductBtn.onclick = async function() {
-        if (priceInput.value === "" || isNaN(priceInput.value)) {
-            alert("Sisestatud hind ei ole aksepteeritav");
-            return;
-        }
+createProductBtn.onclick = async function() {
 
-        const newProduct = {
-            name: nameInput.value,
-            price: Number(priceInput.value),
-            image: imageInput.value,
-            sold: false
-        }
+    createProductBtn.disabled = true;
 
-        products.push(newProduct);
-        await SaveProducts();
-        renderProducts();
-
-        productMenu.classList.remove("active");
-        nameInput.value = "";
-        priceInput.value = "";
-        imageInput.value = "";
+    if (priceInput.value === "" || isNaN(priceInput.value)) {
+        alert("Sisestatud hind ei ole aksepteeritav");
+        createProductBtn.disabled = false;
+        return;
     }
+
+    const newProduct = {
+        name: nameInput.value,
+        price: Number(priceInput.value),
+        image: imageInput.value,
+        sold: false
+    }
+
+    products.push(newProduct);
+    await SaveProducts();
+    renderProducts();
+
+    productMenu.classList.remove("active");
+
+    nameInput.value = "";
+    priceInput.value = "";
+    imageInput.value = "";
+
+    createProductBtn.disabled = false;
+}
 
     APCloseBtn.onclick = function() {
         productMenu.classList.remove("active");
@@ -289,30 +195,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-
-
 const body = document.querySelector("body");
 
 body.classList.add("darkmodestart");
-
 body.classList.add("darkstart");
 
 const darkmode = document.querySelector("#darkmode");
-
-darkmode.onclick = function() {
-    if (body.classList.contains("light")) {
-        body.classList.remove("darkstart");
-        body.classList.remove("light");
-        body.classList.add("dark");
-    } else if (body.classList.contains("darkstart")) {
-        body.classList.remove("darkstart");
-        body.classList.remove("dark");
-        body.classList.add("light");
-    } else {
-        body.classList.remove("dark");
-        body.classList.add("light");
-    }
-}
 
 darkmode.onclick = function(){
 
@@ -325,21 +213,12 @@ darkmode.onclick = function(){
 		body.classList.add("dark");
 		body.classList.remove("light");
 		console.log("dark");
-
-	if (body.classList.contains("light")) {
+    }
+	else if (body.classList.contains("dark")) {
 		body.classList.remove("darkstart");
-		body.classList.remove("light");
-		body.classList.add("dark");
-		console.log("dark");
-	} else if (body.classList.contains("darkstart")) {
-		body.classList.remove("darkstart");
-		body.classList.remove("dark");
 		body.classList.add("light");
-		console.log("light from start");
-
-	} else {
 		body.classList.remove("dark");
-		body.classList.add("light");
-	}
-}}
+		console.log("light");
 
+    }
+}
